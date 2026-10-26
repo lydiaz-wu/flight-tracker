@@ -1,1 +1,4 @@
-self.addEventListener('push',event=>{let data={};try{data=event.data?event.data.json():{}}catch(e){}event.waitUntil(self.registration.showNotification(data.title||'Flight Tracker',{body:data.body||'機票價格有新變化',icon:'/icon.svg',data:{url:data.url||'/'},tag:data.tag||'flight-price'}))});self.addEventListener('notificationclick',event=>{event.notification.close();event.waitUntil(clients.openWindow(event.notification.data?.url||'/'))});
+const CACHE='flight-tracker-pages-v1';const ASSETS=['./','./index.html','./app.js','./styles.css','./manifest.webmanifest','./icon.svg'];
+self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)));self.skipWaiting()});
+self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))));self.clients.claim()});
+self.addEventListener('fetch',e=>{if(e.request.method!=='GET'||new URL(e.request.url).origin!==self.location.origin)return;e.respondWith(fetch(e.request).then(res=>{if(res.ok){const clone=res.clone();caches.open(CACHE).then(c=>c.put(e.request,clone))}return res}).catch(()=>caches.match(e.request)))});

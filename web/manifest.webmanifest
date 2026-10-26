@@ -1,1 +1,1 @@
-{"name":"Flight Tracker","short_name":"Flights","description":"航班價格追蹤與提醒","start_url":"/","scope":"/","display":"standalone","background_color":"#f5f2ea","theme_color":"#f5f2ea","icons":[{"src":"/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]}
+{"name": "Flight Tracker · 航線規劃", "short_name": "Flights", "description": "機票航線規劃與價格監控設定（本機預覽版）", "start_url": "./", "scope": "./", "display": "standalone", "background_color": "#f5f2ea", "theme_color": "#f5f2ea", "icons": [{"src": "./icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any"}]}
