@@ -32,4 +32,7 @@ $('export').onclick=()=>{const blob=new Blob([JSON.stringify({format:'flight-tra
 $('import').onclick=()=>$('importfile').click();
 $('importfile').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{if(file.size>1024*1024)throw Error('檔案超過 1 MB');const data=JSON.parse(await file.text());if(data.format!=='flight-tracker-pages-v1'||!Array.isArray(data.monitors)||data.monitors.length>300)throw Error('備份檔格式不正確');for(const m of data.monitors){if(!m||typeof m.id!=='string'||m.id.length>120)throw Error('備份資料不完整');validate(m);}if(!confirm('匯入會取代目前所有航線，確定嗎？'))return;monitors=data.monitors;persist();refresh();notice('備份已匯入');}catch(err){notice('匯入失敗：'+err.message);}finally{e.target.value='';}};
 monitors=read();refresh();
-if('serviceWorker'in navigator)navigator.serviceWorker.register('./service-worker.js').catch(()=>{});
+$('dashboard').hidden=false;
+
+if('serviceWorker'in navigator)
+  navigator.serviceWorker.register('./service-worker.js').catch(()=>{});
