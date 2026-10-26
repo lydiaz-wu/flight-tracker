@@ -1,0 +1,1 @@
+{"name":"Flight Tracker","short_name":"Flights","description":"航班價格追蹤與提醒","start_url":"/","scope":"/","display":"standalone","background_color":"#f5f2ea","theme_color":"#f5f2ea","icons":[{"src":"/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]}
