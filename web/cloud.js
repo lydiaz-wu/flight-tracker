@@ -144,9 +144,21 @@
           user
         });
       }
+    
     } else {
       save(saved());
-    if(await refreshSession())await loadMonitors().catch(e=>renderStatus('同步失敗：'+e.message));
-    timer=setInterval(()=>{if(session)loadMonitors().catch(()=>{});},5*60*1000);
+    }
+
+    if (await refreshSession()) {
+      await loadMonitors().catch(e =>
+        renderStatus('同步失敗：' + e.message)
+      );
+    }
+
+    timer = setInterval(() => {
+      if (session) {
+        loadMonitors().catch(() => {});
+      }
+    }, 5 * 60 * 1000);
   });
 })();
