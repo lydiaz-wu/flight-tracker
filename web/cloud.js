@@ -41,8 +41,19 @@
         const mode = ev.submitter?.value || 'signin';
         const payload={email:f.elements.email.value.trim(),password:f.elements.password.value};
         if(mode==='signup') {
-          await api('/auth/v1/signup',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
-          renderStatus('已送出註冊；如果需要驗證 Email，請先去信箱完成驗證，再登入。');return;
+          const redirectTo = new URL('./', window.location.href).href;
+          
+          await api(
+            '/auth/v1/signup?redirect_to=' + encodeURIComponent(redirectTo),
+            {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            }
+          );
+        
+          renderStatus('已送出註冊，請至 Email 完成驗證後再登入。');
+          return;
         }
         const data = await api('/auth/v1/token?grant_type=password',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
         save({...data,expires_at:Math.floor(Date.now()/1000)+data.expires_in});
@@ -104,8 +115,37 @@
   window.flightCloud={enabled,get isLoggedIn(){return Boolean(session)},write,remove,loadMonitors};
   addEventListener('DOMContentLoaded',async()=>{
     initAuthUI();
-    if(!enabled) return;
-    save(saved());
+    if (!enabled) return;
+  
+    const hash = new URLSearchParams(window.location.hash.slice(1));
+  
+    if (hash.has('access_token') && hash.has('refresh_token')) {
+      const accessToken = hash.get('access_token');
+      const refreshToken = hash.get('refresh_token');
+      const expiresIn = Number(hash.get('expires_in') || 3600);
+  
+      // Retrieve authenticated user from Supabase.
+      const res = await fetch(`${origin}/auth/v1/user`, {
+        headers: {
+          apikey: config.anonKey,
+          Authorization: `Bearer ${accessToken}`
+        }
+      });
+  
+      // Remove credentials from the browser address bar.
+      history.replaceState(null, '', location.pathname + location.search);
+  
+      if (res.ok) {
+        const user = await res.json();
+        save({
+          access_token: accessToken,
+          refresh_token: refreshToken,
+          expires_at: Math.floor(Date.now() / 1000) + expiresIn,
+          user
+        });
+      }
+    } else {
+      save(saved());
     if(await refreshSession())await loadMonitors().catch(e=>renderStatus('同步失敗：'+e.message));
     timer=setInterval(()=>{if(session)loadMonitors().catch(()=>{});},5*60*1000);
   });
