@@ -225,3 +225,12 @@ logs/
 preview/
 data/*
 !data/.gitkeep
+
+# Flight Tracker local files
+.DS_Store
+**/.DS_Store
+.env.*
+!.env.example
+vapid_private.pem
+*.pem
+*.pyc
