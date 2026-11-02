@@ -4,3 +4,94 @@
 
 /* Searchable airport picker (supports IATA, Chinese and English city names) */
 .airport-field{position:relative}.airport-suggestions{position:absolute;top:calc(100% + 3px);left:0;right:0;z-index:30;background:#fffefa;border:1px solid #d9ddd6;border-radius:12px;box-shadow:0 14px 32px #18262026;max-height:245px;overflow-y:auto;overscroll-behavior:contain}.airport-suggestions[hidden]{display:none}.airport-option{display:block;width:100%;border:0;border-radius:0;text-align:left;padding:12px 13px;background:transparent;color:#263e3b;font-weight:500;font-size:13px;line-height:1.5}.airport-option+.airport-option{border-top:1px solid #f0eee8}.airport-option:hover,.airport-option.active{background:#eaf2ed;opacity:1}.airport-option strong{font-size:14px;margin-right:7px}.airport-option small{display:block;font-size:11px;color:#79847c;margin-top:1px}.airport-empty{padding:14px;color:#727d76;font-size:12px} 
+
+/* Flight Tracker Vintage Palette Refresh v1 */
+:root {
+  --ft-bg: #c5beb9; /* Classic Chalk */
+  --ft-ink: #101311; /* Vintage Onyx */
+  --ft-olive: #5f523e; /* Dusty Olive */
+  --ft-rouge: #932a13; /* Retro Rouge */
+  --ft-surface: #f8f5f0;
+  --ft-border: #d9d1c9;
+  --ft-muted: #716c65;
+  background: var(--ft-surface);
+  color: var(--ft-ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Segoe UI", sans-serif;
+  font-size: 14px;
+}
+body {background: var(--ft-surface); color: var(--ft-ink);}
+header {height: 62px; background: #fbf9f5; border-color: var(--ft-border);}
+.brand {color:var(--ft-ink);font-size:17px;letter-spacing:-.4px;white-space:nowrap;}
+.brand span {font-size:10px;color:var(--ft-muted);margin-left:4px;}
+nav {gap:6px;}
+nav button {font-weight:600;}
+main {padding-top: 18px;}
+h1,h2 {letter-spacing:-.4px;color:var(--ft-ink);}
+h2 {font-size:18px;line-height:1.35;}
+p {color:var(--ft-muted);}
+button {background:var(--ft-olive); color:#fff; border-radius:12px; font-size:13px; padding:10px 14px; transition:background-color .2s ease,transform .2s ease;}
+button:hover {opacity:1;filter:brightness(.95);}
+button:focus-visible, input:focus-visible, select:focus-visible {outline:2px solid var(--ft-rouge);outline-offset:2px;}
+.secondary {background:#eee9e1;color:var(--ft-ink);}
+.hero {padding: 10px 0 20px;display:flex;justify-content:flex-start;align-items:center;min-height:0;}
+.hero #add {background:var(--ft-olive);padding:12px 18px;font-size:14px;}
+.eyebrow,.hero h1 {display:none;}
+#summary[hidden]{display:none!important;}
+.notice {background:#f4eee5;border:1px solid var(--ft-border);color:var(--ft-olive);border-radius:16px;padding:16px 18px;margin-bottom:25px;}
+.notice strong {color:var(--ft-ink);font-size:14px;}
+#cloudLoggedIn {margin-top:10px;gap:8px;}
+#cloudLoggedIn button {min-height:39px;font-size:12px;}
+#cloudStatus {color:var(--ft-muted);font-size:12px;line-height:1.5;margin:12px 0 0;}
+.sectionhead {margin:24px 0 12px;}
+.sectionhead h2 {font-size:17px;margin:0;}
+.sectionhead span {font-size:12px;color:var(--ft-muted);}
+.cards {gap:14px;margin-bottom:32px;}
+.card,.panel,.alert {background:#fffdf9;border-color:var(--ft-border);box-shadow:0 3px 14px #10131107;border-radius:18px;}
+.card {padding:20px;min-width:0;}
+.card .route {font-size:25px;letter-spacing:-.6px;line-height:1.25;margin-top:8px;color:var(--ft-ink);}
+.card .date {font-size:12px;color:var(--ft-muted);line-height:1.5;padding:8px 0 10px;overflow-wrap:anywhere;}
+.pills {gap:5px;}
+.pill {font-size:10px;background:#e8e5df;color:var(--ft-olive);padding:5px 8px;}
+.pill:first-child {background:#ddd8ce;color:#514734;}
+.fare-spark {color:var(--ft-olive);max-height:68px;margin-top:8px;}
+.history-note {font-size:11px;line-height:1.6;color:var(--ft-muted);}
+.cardfooter {margin-top:16px;gap:8px;}
+.cardfooter button {font-size:12px;padding:9px 14px;}
+.alert {font-size:12px;line-height:1.6;padding:14px 16px;}
+#message {font-size:12px;}
+input:not([type=checkbox]),select {border-color:var(--ft-border);color:var(--ft-ink);background:#fffdf9;}
+dialog {border-color:var(--ft-border);background:#fffdf9;border-radius:20px;}
+dialog::backdrop {background:#15131099;}
+.airport-suggestions {background:#fffdf9;border-color:var(--ft-border);}
+.airport-option {color:var(--ft-ink);}
+.airport-option:hover,.airport-option.active {background:#f1ebe4;}
+@media(max-width:580px) {
+  :root {font-size:13px;}
+  header {height:58px;padding-inline:14px;gap:8px;}
+  .brand {font-size:15px;}
+  nav {gap:5px;}
+  nav button {font-size:10px;padding:8px 9px;border-radius:9px;}
+  main {padding:13px 14px 70px;}
+  .hero {padding:4px 0 18px;gap:0;flex-direction:row;}
+  .hero #add {font-size:13px;padding:11px 15px;}
+  .notice {padding:14px;margin-bottom:20px;}
+  #cloudLoggedIn {display:grid;grid-template-columns:1fr 1.2fr auto;gap:6px;}
+  #cloudLoggedIn button {min-width:0;padding:10px 6px;font-size:11px;white-space:nowrap;}
+  .sectionhead {margin-top:22px;}
+  .sectionhead h2 {font-size:16px;}
+  .cards {grid-template-columns: minmax(0,1fr);margin-bottom:28px;}
+  .card {padding:17px;}
+  .card .route {font-size:24px;}
+  .card .date {font-size:12px;}
+  .fare-spark {max-height:62px;}
+  .history-note {font-size:11px;}
+  dialog {width:min(95vw,580px);padding:17px;}
+  .two {gap:9px;}
+}
+@media(max-width:370px) {
+  .brand {font-size:14px;}
+  nav button {font-size:9px;padding:8px 7px;}
+  #cloudLoggedIn {grid-template-columns:1fr 1fr;}
+  #cloudLogout {grid-column:span 2;}
+}
+@media(prefers-reduced-motion:reduce) {button{transition:none;}}
