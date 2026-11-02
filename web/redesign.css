@@ -1,0 +1,116 @@
+/* Flight Tracker 2.0 — Editorial Travel / palette supplied by owner
+   Retro Rouge #932A13 | Classic Chalk #C5BEB9
+   Vintage Onyx #101311 | Dusty Olive #5F523E
+   Overrides existing styles.css; keep this stylesheet LAST. */
+:root {
+  --ft-paper:#f6f3ee; --ft-card:#fffdf9; --ft-stone:#c5beb9;
+  --ft-ink:#101311; --ft-olive:#5f523e; --ft-rouge:#932a13;
+  --ft-muted:#746e68; --ft-line:#e4ded5; --ft-wash:#eeeae4;
+  font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC","Segoe UI",sans-serif;
+  background:var(--ft-paper);color:var(--ft-ink);font-size:14px;
+  -webkit-font-smoothing:antialiased;
+}
+html{background:var(--ft-paper);scroll-behavior:smooth}
+body{background:var(--ft-paper);margin:0;color:var(--ft-ink);overflow-x:hidden}
+*,*::before,*::after{box-sizing:border-box}
+button,input,select{font:inherit}
+button{background:var(--ft-olive);color:#fff;border:1px solid transparent;border-radius:12px;padding:10px 15px;font-size:13px;font-weight:700;line-height:1.3;min-height:40px;transition:background .2s,box-shadow .2s,transform .2s;touch-action:manipulation}
+button:hover{opacity:1;background:#4b4032}
+button:active{transform:translateY(1px)}
+button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #bc8068;outline-offset:3px}
+.secondary{background:var(--ft-wash);color:var(--ft-ink);border-color:var(--ft-line)}
+.secondary:hover{background:#e6e0d8}
+.plain{background:transparent;color:var(--ft-ink);border:0}
+.plain:hover{background:var(--ft-wash)}
+header{position:relative;z-index:15;height:62px;min-height:62px;padding:0 max(24px,calc((100vw - 1040px)/2));background:rgba(246,243,238,.96);border-bottom:1px solid var(--ft-line);gap:14px}
+.brand{font-size:17px;letter-spacing:-.55px;white-space:nowrap;color:var(--ft-ink);display:flex;align-items:baseline;gap:5px}
+.brand b{font-weight:800}.brand span{font-size:10px;letter-spacing:0;color:var(--ft-muted);margin-left:4px}
+header nav{display:flex;align-items:center;gap:7px}
+header nav button{font-size:12px;padding:9px 12px;min-height:36px}
+.ft-utility-menu{position:relative}
+.ft-utility-menu>summary{list-style:none;display:inline-flex;align-items:center;gap:7px;padding:9px 12px;background:var(--ft-wash);color:var(--ft-ink);border:1px solid var(--ft-line);border-radius:11px;font-size:12px;font-weight:700;cursor:pointer}
+.ft-utility-menu>summary::-webkit-details-marker{display:none}
+.ft-utility-actions{position:absolute;top:calc(100% + 9px);right:0;min-width:165px;background:var(--ft-card);padding:8px;border:1px solid var(--ft-line);border-radius:14px;box-shadow:0 16px 40px #1013111c;display:grid;gap:5px}
+.ft-utility-actions button{width:100%;text-align:left}
+main{width:100%;max-width:1088px;margin:auto;padding:20px 24px 80px}
+.hero{min-height:unset;padding:40px 0 31px;gap:20px;align-items:end}
+.hero>div:first-child{max-width:780px}
+.eyebrow{font-size:10px;letter-spacing:.2em;font-weight:800;color:var(--ft-rouge)}
+h1,.hero h1{font-size:clamp(30px,4vw,45px);line-height:1.16;letter-spacing:-.045em;font-weight:800;margin:12px 0 11px;color:var(--ft-ink)}
+.hero p,.hero #summary{margin:0;color:var(--ft-muted);font-size:13px;line-height:1.65}
+.hero button#add{background:var(--ft-rouge);font-size:13px;letter-spacing:.02em;white-space:nowrap;box-shadow:0 6px 16px #932a1314}
+.hero button#add:hover{background:#7e2411}
+.ft-hero-meta{color:var(--ft-muted);font-size:12px;margin-top:9px}
+.notice,#cloudPanel{margin:0 0 25px;background:#f1ece5;border:1px solid #e0d6c7;border-radius:18px;padding:16px 19px;color:var(--ft-ink);box-shadow:none}
+#cloudPanel>strong{display:flex;align-items:center;gap:8px;margin-bottom:4px;font-size:13px;letter-spacing:.02em;color:var(--ft-ink)}
+#cloudPanel>strong::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ft-olive)}
+#cloudLoggedIn{display:flex;flex-wrap:wrap;gap:8px;margin:11px 0 0}
+#cloudLoggedIn button{font-size:12px;padding:9px 12px;min-height:36px}
+#pushEnable{background:var(--ft-olive);color:#fff;border-color:var(--ft-olive)}
+#pushEnable:hover{background:#4b4032}
+#cloudStatus{font-size:12px;color:var(--ft-muted);margin:9px 0 0;overflow-wrap:anywhere;line-height:1.6}
+.cloud-login{display:grid;grid-template-columns:repeat(2,minmax(0,1fr)) auto auto;align-items:center;gap:8px;margin:11px 0 0}
+.cloud-login input{max-width:unset;min-width:0;background:var(--ft-card)!important}
+#localBanner{font-size:12px;color:var(--ft-muted)}
+#message:not(:empty){font-size:12px;margin:0 0 18px;color:var(--ft-rouge)}
+.sectionhead{margin:24px 0 13px;display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.sectionhead h2{font-size:17px;line-height:1.3;font-weight:800;letter-spacing:-.035em;color:var(--ft-ink);margin:0}
+.sectionhead span{font-size:12px;color:var(--ft-muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:15px;margin-bottom:34px;align-items:stretch}
+.card,.alert,.panel{background:var(--ft-card);border:1px solid var(--ft-line);border-radius:19px;box-shadow:0 5px 24px #10131108}
+.card{padding:19px 19px 15px;display:flex;flex-direction:column;min-height:265px;overflow:hidden}
+.card .pills{gap:5px;margin-bottom:9px}
+.pill{font-size:10px;font-weight:700;line-height:1.3;padding:4px 8px;border-radius:30px;background:#ece8df;color:var(--ft-olive)}
+.card .pill:first-child{background:#e9dfd8;color:var(--ft-rouge)}
+.card .route{font-size:23px;line-height:1.2;letter-spacing:-.06em;font-weight:800;color:var(--ft-ink)}
+.card .date{padding:5px 0;font-size:12px;line-height:1.55;color:var(--ft-muted);overflow-wrap:anywhere}
+.card .date:nth-of-type(4){margin-top:6px}
+.card .date strong{color:var(--ft-rouge)}
+.fare-spark{height:64px;max-height:64px;width:100%;color:var(--ft-rouge);margin:10px 0 3px;opacity:.9}
+.fare-spark polyline{stroke-width:1.6}
+.history-note{font-size:10px;line-height:1.5;color:var(--ft-muted);margin:4px 0 8px}
+.cardfooter{margin-top:auto;padding-top:12px;display:flex;justify-content:flex-end;gap:7px;border-top:1px solid var(--ft-line)}
+.cardfooter button{font-size:11px;min-height:35px;border-radius:10px;padding:8px 13px}
+.cardfooter button[data-remove]{color:var(--ft-rouge);background:#f5eae4;border-color:transparent}
+.cardfooter button[data-remove]:hover{background:#eddbd0}
+.alerts{gap:10px}.alert{box-shadow:none;padding:15px 18px;font-size:12px;line-height:1.6;color:var(--ft-muted)}
+#alerts{margin-bottom:20px}
+dialog{width:min(94vw,610px);max-height:min(90vh,850px);padding:24px;border-radius:22px;border:1px solid var(--ft-line);background:var(--ft-card);box-shadow:0 24px 90px #10131140;color:var(--ft-ink)}
+dialog::backdrop{background:rgba(16,19,17,.55)}
+.dialoghead h2{font-size:19px;margin:0}.dialoghead{margin-bottom:12px}
+dialog label,.panel label{color:var(--ft-olive);font-size:12px;line-height:1.5}
+input:not([type=checkbox]),select{border-color:#d9d1c8;border-radius:11px;background:#fff;color:var(--ft-ink);min-height:42px;padding:10px 12px;font-size:14px}
+input::placeholder{color:#99928b}.hint{font-size:11px;color:var(--ft-muted)}
+fieldset{border:1px solid var(--ft-line);border-radius:13px;padding:11px 14px}
+legend{color:var(--ft-olive);font-size:12px;font-weight:700;padding:0 4px}
+.airlines{gap:3px 10px}.checks label,.airlines label{font-size:12px;color:var(--ft-ink)}
+.full{margin-top:12px;min-height:44px;background:var(--ft-rouge)}
+.airport-suggestions{border-color:var(--ft-line);background:var(--ft-card)}
+.airport-option{color:var(--ft-ink)}.airport-option:hover,.airport-option.active{background:#f1e7de}
+@media(max-width:700px){
+ header{height:56px;min-height:56px;padding:0 16px}
+ .brand{font-size:16px}
+ main{padding:6px 16px 52px}
+ .hero{padding:24px 0 24px;display:flex;align-items:flex-start;flex-direction:column;gap:15px}
+ .hero h1{font-size:clamp(29px,7.5vw,37px);line-height:1.19;letter-spacing:-.05em;margin:10px 0 10px}
+ .hero p,.hero #summary{font-size:12px}
+ .hero button#add{width:auto;font-size:12px;padding:10px 16px;min-height:39px}
+ .notice,#cloudPanel{border-radius:15px;padding:14px 14px;margin-bottom:22px}
+ #cloudLoggedIn{gap:6px}
+ #cloudLoggedIn button{padding:9px 11px;font-size:11px}
+ .sectionhead{margin:22px 0 12px}.sectionhead h2{font-size:17px}
+ .cards{grid-template-columns:minmax(0,1fr);gap:12px;margin-bottom:31px}
+ .card{padding:17px 16px 13px;min-height:unset;border-radius:17px}
+ .card .route{font-size:22px}.card .date{font-size:12px}
+ .fare-spark{height:58px;max-height:58px}
+ .history-note{font-size:10px}
+ .cloud-login{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .cloud-login input{grid-column:1/-1;min-width:0}
+ .cloud-login button{width:100%}
+ dialog{width:calc(100vw - 20px);max-height:calc(100dvh - 30px);padding:17px 15px 22px;border-radius:18px}
+ .two{gap:9px}
+ .two>label{min-width:0}
+ .airlines{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:380px){main{padding-inline:12px}header{padding-inline:12px}.brand{font-size:14px}.hero h1{font-size:29px}.ft-utility-menu>summary{font-size:11px;padding:8px}.card{padding-inline:14px}.two{flex-wrap:wrap}.two>label{flex:1 1 100%}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
