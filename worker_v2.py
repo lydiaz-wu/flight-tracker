@@ -26,12 +26,31 @@ def combinations(m,limit=12):
                 r=date.fromisoformat(m['return_start']);r_end=date.fromisoformat(m['return_end'])
                 while r<=r_end and n<limit:
                     stay=(r-d).days
-                    if stay>0 and (m['min_stay'] is None or m['min_stay']<=stay<=m['max_stay']):
+                    if stay>0 and (m['min_stay'] is None or stay>=m['min_stay']) and (m['max_stay'] is None or stay<=m['max_stay']):
                         yield d.isoformat(),r.isoformat();n+=1
                     r+=timedelta(days=1)
             else:
                 yield d.isoformat(),'';n+=1
         d+=timedelta(days=1)
+
+def valid_fare(fare, *, airline, depart, ret):
+    """Only persist the exact requested itinerary and a tax-inclusive TWD price.
+
+    A round-trip fare without a confirmed return leg is not a round-trip quote.
+    Never interpret missing price or mismatched dates as zero.
+    """
+    if fare.airline != airline or fare.depart_date != depart:
+        return False
+    if fare.currency != 'TWD' or fare.price_total is None:
+        return False
+    if isinstance(fare.price_total, bool) or fare.price_total <= 0:
+        return False
+    if ret:
+        return (fare.trip_type == '來回'
+                and bool(fare.return_flight_no)
+                and fare.return_depart_date == ret)
+    return fare.trip_type == '單程' and not fare.return_flight_no
+
 
 def scrape_monitor(m,limit=12):
     observations=[];errors=[]
@@ -47,10 +66,12 @@ def scrape_monitor(m,limit=12):
                     result=cls(airline,trip,session,ZoneInfo('Asia/Taipei'),retry=0).run()
                     if not result.success:
                         errors.append(f'{code} {depart}/{ret}: {result.error}');continue
-                    prices=[f for f in result.data if f.comparable_price is not None]
+                    prices=[f for f in result.data if valid_fare(f,airline=code,depart=depart,ret=ret)]
                     if prices:
-                        cheapest=min(prices,key=lambda f:f.comparable_price)
-                        observations.append({'airline':code,'departure':depart,'return_date':ret,'price':cheapest.comparable_price,'booking_url':cheapest.booking_url or cheapest.source_url})
+                        cheapest=min(prices,key=lambda f:f.price_total)
+                        observations.append({'airline':code,'departure':depart,'return_date':ret,'price':cheapest.price_total,'booking_url':cheapest.source_url or cheapest.booking_url})
+                    elif result.data:
+                        errors.append(f'{code} {depart}/{ret}: rejected {len(result.data)} mismatched/incomplete fares')
                 except Exception as ex:
                     errors.append(f'{code} {depart}/{ret}: {ex}')
     return observations,errors
